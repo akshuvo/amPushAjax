@@ -12,19 +12,9 @@
             }
             main_xhr = $.ajax({
 
-        xhr: function() {
-            var xhr = new window.XMLHttpRequest();
-            xhr.addEventListener('progress', function(e) {
-                if (e.lengthComputable) {
-                    //$('.progressbar .bar').css('width', '' + (100 * e.loaded / e.total) + '%');
-
-                    console.log( (100 * e.loaded / e.total) );
-                }
-            });
-            return xhr;
-        }, 
 
                 url: url,
+                asynch: true,
                 beforeSend: function() {
                     $( document ).find( '#amPushAjax' ).addClass( 'loading' );
                 },
@@ -40,6 +30,8 @@
                 }
             });
         };
+
+
 
 
         $( document ).on('click', 'a', function(e){
