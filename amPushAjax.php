@@ -29,6 +29,7 @@ class amPushAjax{
 		add_action('plugins_loaded', [ $this, 'load_text_domain' ], 10, 2);		
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ], 100 );
+		add_action( 'wp_footer', [ $this, 'ajaxloader' ] );
 
 	}
 
@@ -56,6 +57,15 @@ class amPushAjax{
 		        'ampushajax_nonce' => wp_create_nonce( 'ampushajax_nonce' ),
 		    )
 	    );
+	}
+
+	/**
+	 *	Enqueue  scripts
+	 *
+	 */
+	public function ajaxloader(){
+		echo '<div id="amPushAjax"></div>';
+		
 	}
 
 

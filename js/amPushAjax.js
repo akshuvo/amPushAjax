@@ -12,6 +12,9 @@
             }
             xhr = $.ajax({
                 url: url,
+                beforeSend: function() {
+                    $( document ).find( '#amPushAjax' ).addClass( 'loading' );
+                },
                 success: function(data) {
                     //console.log(data);
                     //$('.archive_ajax_result').html($('.archive_ajax_result', data).html());
@@ -20,6 +23,7 @@
                     $('#content').html($('#content', data).html());                    
                
                     document.title = $(data).filter('title').text();
+                    $( document ).find( '#amPushAjax' ).removeClass( 'loading' );
                 }
             });
         };
