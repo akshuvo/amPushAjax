@@ -4,13 +4,26 @@
     $(document).ready(function(){
    
 
-        var xhr;
+        var main_xhr;
 
         var amPushAjax = function( url, eventType ){
-            if(xhr && xhr.readyState != 4){
-                xhr.abort();
+            if(main_xhr && main_xhr.readyState != 4){
+                main_xhr.abort();
             }
-            xhr = $.ajax({
+            main_xhr = $.ajax({
+
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+            xhr.addEventListener('progress', function(e) {
+                if (e.lengthComputable) {
+                    //$('.progressbar .bar').css('width', '' + (100 * e.loaded / e.total) + '%');
+
+                    console.log( (100 * e.loaded / e.total) );
+                }
+            });
+            return xhr;
+        }, 
+
                 url: url,
                 beforeSend: function() {
                     $( document ).find( '#amPushAjax' ).addClass( 'loading' );
